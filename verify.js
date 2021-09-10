@@ -139,7 +139,7 @@ module.exports = function (jwtString, secretOrPublicKey, options, callback) {
       if (typeof payload.nbf !== 'number') {
         return done(new JsonWebTokenError('invalid nbf value'));
       }
-      if (payload.nbf > clockTimestamp + (options.clockTolerance || 0)) {
+      if (payload.nbf > clockTimestamp + (options.clockTolerance || 10)) {
         return done(new NotBeforeError('jwt not active', new Date(payload.nbf * 1000)));
       }
     }
